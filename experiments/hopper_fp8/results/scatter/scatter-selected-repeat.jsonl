@@ -1,0 +1,41 @@
+{"event": "correctness", "T": 1, "routing": "uniform", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 1, "routing": "uniform", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "timing", "T": 1, "routing": "uniform", "ms": {"r1g32w8": 0.003989759981632233, "baseline": 0.003977600038051605}, "samples": {"r1g32w8": [0.004133760035037994, 0.003989759981632233, 0.004000639915466309, 0.004003199934959412, 0.004011520147323608, 0.003985919952392578, 0.003975679874420166, 0.0039801600575447085, 0.003962880074977875], "baseline": [0.00411520004272461, 0.004032000005245209, 0.003959679901599884, 0.003986560106277466, 0.003954559862613678, 0.004041599929332733, 0.0039680001139640805, 0.003933440148830414, 0.003977600038051605]}}
+{"event": "graph_mutation", "T": 1, "routing": "uniform", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "graph_mutation", "T": 1, "routing": "uniform", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 256, "routing": "uniform", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 256, "routing": "uniform", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "timing", "T": 256, "routing": "uniform", "ms": {"r1g32w8": 0.004012160003185272, "baseline": 0.004645119905471801}, "samples": {"r1g32w8": [0.004165120124816894, 0.004003840088844299, 0.004072319865226746, 0.004025599956512451, 0.003983359932899475, 0.004030080139636993, 0.0039948800206184385, 0.003995519876480102, 0.004012160003185272], "baseline": [0.004664959907531738, 0.004654079973697663, 0.004634880125522613, 0.004635519981384277, 0.004651519954204559, 0.004631040096282959, 0.004649600088596344, 0.004645119905471801, 0.00464383989572525]}}
+{"event": "graph_mutation", "T": 256, "routing": "uniform", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "graph_mutation", "T": 256, "routing": "uniform", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 1024, "routing": "uniform", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 1024, "routing": "uniform", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "timing", "T": 1024, "routing": "uniform", "ms": {"r1g32w8": 0.009373440146446229, "baseline": 0.011943039894104003}, "samples": {"r1g32w8": [0.009388160109519959, 0.00933568000793457, 0.009434239864349365, 0.009369599819183349, 0.009373440146446229, 0.009409919977188111, 0.00936896026134491, 0.009197440147399902, 0.009407359957695007], "baseline": [0.011971839666366578, 0.011968640089035034, 0.011943039894104003, 0.011980799436569213, 0.01189568042755127, 0.011927039623260497, 0.01191167950630188, 0.01195199966430664, 0.011940480470657348]}}
+{"event": "graph_mutation", "T": 1024, "routing": "uniform", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "graph_mutation", "T": 1024, "routing": "uniform", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 4096, "routing": "uniform", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 4096, "routing": "uniform", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "timing", "T": 4096, "routing": "uniform", "ms": {"r1g32w8": 0.04833024024963379, "baseline": 0.051651840209960935}, "samples": {"r1g32w8": [0.0484825611114502, 0.04831103801727295, 0.048314881324768064, 0.04837759971618652, 0.04849023818969726, 0.04833024024963379, 0.04829376220703125, 0.04833087921142578, 0.04827199935913086], "baseline": [0.05157824039459229, 0.05176191806793213, 0.05172736167907715, 0.05170112133026123, 0.05163712024688721, 0.05161151885986328, 0.051604480743408204, 0.051651840209960935, 0.051695361137390136]}}
+{"event": "graph_mutation", "T": 4096, "routing": "uniform", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "graph_mutation", "T": 4096, "routing": "uniform", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 8192, "routing": "uniform", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 8192, "routing": "uniform", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "timing", "T": 8192, "routing": "uniform", "ms": {"r1g32w8": 0.09504704475402832, "baseline": 0.10539263725280762}, "samples": {"r1g32w8": [0.095098237991333, 0.09497344017028808, 0.09487168312072754, 0.09509696006774902, 0.09512576103210449, 0.09502079963684082, 0.09512895584106446, 0.095032958984375, 0.09504704475402832], "baseline": [0.10528512001037597, 0.10534079551696778, 0.10534336090087891, 0.10539263725280762, 0.10541952133178711, 0.10535552024841309, 0.10541952133178711, 0.10545920372009278, 0.10543744087219238]}}
+{"event": "graph_mutation", "T": 8192, "routing": "uniform", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "graph_mutation", "T": 8192, "routing": "uniform", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 16384, "routing": "uniform", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 16384, "routing": "uniform", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "timing", "T": 16384, "routing": "uniform", "ms": {"r1g32w8": 0.1880044746398926, "baseline": 0.3113849639892578}, "samples": {"r1g32w8": [0.18796735763549804, 0.18798463821411132, 0.18806463241577148, 0.1880044746398926, 0.1879167938232422, 0.18807424545288087, 0.18806528091430663, 0.1880665588378906, 0.18790655136108397], "baseline": [0.31127616882324216, 0.31122623443603514, 0.3113849639892578, 0.311201286315918, 0.31132543563842774, 0.31175039291381834, 0.3116127967834473, 0.3115737533569336, 0.3124294471740723]}}
+{"event": "graph_mutation", "T": 16384, "routing": "uniform", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "graph_mutation", "T": 16384, "routing": "uniform", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 16384, "routing": "hot", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 16384, "routing": "hot", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "timing", "T": 16384, "routing": "hot", "ms": {"r1g32w8": 0.182938232421875, "baseline": 0.31374271392822267}, "samples": {"r1g32w8": [0.18303808212280273, 0.18286975860595703, 0.18300928115844728, 0.1829337692260742, 0.18297216415405274, 0.18292224884033204, 0.182938232421875, 0.18288448333740234, 0.18301567077636718], "baseline": [0.31373504638671873, 0.31374271392822267, 0.31356224060058596, 0.31371776580810545, 0.3133535957336426, 0.3138700866699219, 0.31441471099853513, 0.3143302345275879, 0.3144550323486328]}}
+{"event": "graph_mutation", "T": 16384, "routing": "hot", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "graph_mutation", "T": 16384, "routing": "hot", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 16384, "routing": "skew", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "correctness", "T": 16384, "routing": "skew", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "timing", "T": 16384, "routing": "skew", "ms": {"r1g32w8": 0.18651775360107423, "baseline": 0.3119513511657715}, "samples": {"r1g32w8": [0.18651071548461914, 0.18672767639160157, 0.18658687591552733, 0.18657663345336914, 0.18641984939575196, 0.18664703369140626, 0.18651647567749025, 0.1864672088623047, 0.18651775360107423], "baseline": [0.31192256927490236, 0.312108154296875, 0.3119513511657715, 0.31209728240966794, 0.31202432632446286, 0.3119468879699707, 0.3119660758972168, 0.31194047927856444, 0.31188159942626953]}}
+{"event": "graph_mutation", "T": 16384, "routing": "skew", "name": "r1g32w8", "bytes_equal": true, "scales_equal": true}
+{"event": "graph_mutation", "T": 16384, "routing": "skew", "name": "baseline", "bytes_equal": true, "scales_equal": true}
+{"event": "completed"}

@@ -1,0 +1,25 @@
+{"event": "case", "T": 1, "H": 3072, "magnitude": 1e-12, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 1, "H": 3072, "magnitude": 1.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 1, "H": 3072, "magnitude": 10000.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 3, "H": 384, "magnitude": 1e-12, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 3, "H": 384, "magnitude": 1.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 3, "H": 384, "magnitude": 10000.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 63, "H": 3072, "magnitude": 1e-12, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 63, "H": 3072, "magnitude": 1.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 63, "H": 3072, "magnitude": 10000.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 64, "H": 3072, "magnitude": 1e-12, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 64, "H": 3072, "magnitude": 1.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 64, "H": 3072, "magnitude": 10000.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 65, "H": 3072, "magnitude": 1e-12, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 65, "H": 3072, "magnitude": 1.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 65, "H": 3072, "magnitude": 10000.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 255, "H": 3072, "magnitude": 1e-12, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 255, "H": 3072, "magnitude": 1.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 255, "H": 3072, "magnitude": 10000.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 256, "H": 3072, "magnitude": 1e-12, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 256, "H": 3072, "magnitude": 1.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 256, "H": 3072, "magnitude": 10000.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 257, "H": 3072, "magnitude": 1e-12, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 257, "H": 3072, "magnitude": 1.0, "bytes_equal": true, "scales_equal": true}
+{"event": "case", "T": 257, "H": 3072, "magnitude": 10000.0, "bytes_equal": true, "scales_equal": true}
+{"event": "completed"}

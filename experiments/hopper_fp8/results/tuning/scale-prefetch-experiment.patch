@@ -1,0 +1,143 @@
+--- a/quack/gemm_sm90.py
++++ b/quack/gemm_sm90.py
+@@ -209,6 +209,7 @@
+         # not the plain fp8 slow-accum path.
+         self.sgl_fp8_scales = False
+         self.sgl_scale_product = False
++        self.sgl_scale_prefetch = False
+         self.sgl_ab_stage_cap = 0
+         self.sgl_gate_layout = False
+         self.fp8_slow_accum = not fp8_fast_accum and a_dtype.width == 8 and transform_a is None
+@@ -1322,6 +1323,8 @@
+                     self.pingpong_barrier_sync(warp_group_idx, stage="mma")
+                 iket.range_push("mma")
+                 scale_fn = None
++                scale_load_fn = None
++                scale_apply_fn = None
+                 if const_expr(self.sgl_fp8_scales):
+                     tCc = tiled_mma.get_slice(tidx).partition_C(
+                         cute.make_identity_tensor(self.cta_tile_shape_mnk[:2])
+@@ -1347,6 +1350,12 @@
+                     scale_fn = partial(self.scale_fp8_partial, acc, acc_slow, tCc,
+                         mSFA_mkl, mSFB_nkl, varlen_params, tile_coord_mnkl,
+                         tuple(row_first), tuple(row_map), tuple(col_values), tuple(col_map))
++                    if const_expr(self.sgl_scale_prefetch):
++                        scale_load_fn = partial(self.load_fp8_scales, tCc,
++                            mSFA_mkl, mSFB_nkl, varlen_params, tile_coord_mnkl,
++                            tuple(row_first), tuple(col_values))
++                        scale_apply_fn = partial(self.apply_fp8_scales, acc, acc_slow,
++                            tuple(row_map), tuple(col_map))
+                 if const_expr(not self.mma_is_rs):
+                     ab_read_state = self.mma(
+                         ab_pipeline,
+@@ -1357,6 +1366,8 @@
+                         k_tile_cnt,
+                         warp_group_idx,
+                         scale_fn=scale_fn,
++                        scale_load_fn=scale_load_fn,
++                        scale_apply_fn=scale_apply_fn,
+                     )
+                 else:
+                     ab_read_state = self.mma_rs_interleaved(
+@@ -1699,6 +1710,53 @@
+             else:
+                 total[i] = total[i] + v
+ 
++
++    @cute.jit
++    def load_fp8_scales(self, coords, SA, SB, varlen, tile,
++                       row_first: cutlass.Constexpr[tuple],
++                       col_values: cutlass.Constexpr[tuple], kb: Int32):
++        expert = tile[3]
++        begin = varlen.cu_seqlens_m[expert]
++        end = varlen.cu_seqlens_m[expert + 1]
++        ascale = cute.make_rmem_tensor((len(row_first),), Float32)
++        bscale = cute.make_rmem_tensor((len(col_values),), Float32)
++        for j in cutlass.range_constexpr(len(row_first)):
++            row = begin + tile[0] * self.cta_tile_shape_mnk[0] + coords[row_first[j]][0]
++            sa = Float32(0.0)
++            if row < end:
++                ar = row
++                if const_expr(varlen.mAIdx is not None):
++                    ar = varlen.mAIdx[row]
++                sa = SA[ar, kb]
++            ascale[j] = sa
++        for j in cutlass.range_constexpr(len(col_values)):
++            if const_expr(self.sgl_gate_layout):
++                col = (tile[1] * self.cta_tile_shape_mnk[1] // 256) + col_values[j] * (SB.shape[1] // 2)
++            else:
++                col = (tile[1] * self.cta_tile_shape_mnk[1] // 128) + col_values[j]
++            sb = Float32(0.0)
++            if col < SB.shape[1]:
++                sb = SB[expert, col, kb]
++            bscale[j] = sb
++        combined = cute.make_rmem_tensor((len(row_first), len(col_values)), Float32)
++        if const_expr(True):
++            for r in cutlass.range_constexpr(len(row_first)):
++                for c in cutlass.range_constexpr(len(col_values)):
++                    combined[r,c] = ascale[r] * bscale[c]
++        return combined
++
++    @cute.jit
++    def apply_fp8_scales(self, acc, total,
++                        row_map: cutlass.Constexpr[tuple],
++                        col_map: cutlass.Constexpr[tuple], combined,
++                        first: cutlass.Constexpr[bool]):
++        for i in cutlass.range_constexpr(cute.size(acc)):
++            v = acc[i] * combined[row_map[i], col_map[i]]
++            if const_expr(first):
++                total[i] = v
++            else:
++                total[i] = total[i] + v
++
+     @cute.jit
+     def mma(
+         self,
+@@ -1710,6 +1768,8 @@
+         k_tile_cnt: Int32,
+         warp_group_idx: Int32,
+         scale_fn: Optional[Callable] = None,
++        scale_load_fn: Optional[Callable] = None,
++        scale_apply_fn: Optional[Callable] = None,
+     ) -> cutlass.pipeline.PipelineState:
+         # Prologue MMAs
+         k_pipe_mmas = 1
+@@ -1719,6 +1779,8 @@
+         if 0 < k_tile_cnt:
+             peek_ab_full_status = ab_pipeline.consumer_try_wait(ab_read_state)
+         zero_init = Boolean(True)
++        if const_expr(scale_load_fn is not None):
++            prefetched_scale = scale_load_fn(Int32(0))
+         for k_tile in cutlass.range(num_prologue_mma):
+             # Wait for A/B buffer to be ready
+             ab_pipeline.consumer_wait(ab_read_state, peek_ab_full_status)
+@@ -1732,7 +1794,9 @@
+         # in that case.
+         if const_expr(self.fp8_slow_accum):
+             warpgroup.wait_group(0)
+-            if const_expr(scale_fn is not None):
++            if const_expr(scale_load_fn is not None):
++                scale_apply_fn(prefetched_scale, True)
++            elif const_expr(scale_fn is not None):
+                 scale_fn(Int32(0), True)
+             else:
+                 acc_slow.store(acc.load())
+@@ -1744,13 +1808,17 @@
+             if const_expr(self.fp8_slow_accum):
+                 zero_init = Boolean(True)
+             mma_fn(A_idx=ab_read_state.index, B_idx=ab_read_state.index, zero_init=zero_init)
++            if const_expr(scale_load_fn is not None):
++                prefetched_scale = scale_load_fn(k_tile)
+             zero_init = Boolean(False)
+             # Wait on the wgmma barrier for previous k_pipe_mmas wgmmas to complete
+             if const_expr(not self.fp8_slow_accum):
+                 warpgroup.wait_group(k_pipe_mmas)
+             else:
+                 warpgroup.wait_group(0)
+-                if const_expr(scale_fn is not None):
++                if const_expr(scale_load_fn is not None):
++                    scale_apply_fn(prefetched_scale, False)
++                elif const_expr(scale_fn is not None):
+                     scale_fn(k_tile, False)
+                 else:
+                     acc_slow.store(acc_slow.load() + acc.load())

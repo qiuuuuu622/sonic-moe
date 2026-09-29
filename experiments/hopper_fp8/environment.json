@@ -1,0 +1,27 @@
+{
+  "torch": "2.13.0+cu130",
+  "triton": "3.7.1",
+  "quack-kernels": "0.6.4",
+  "sglang": "0.5.20",
+  "nvidia-cutlass-dsl": "4.6.2",
+  "sonic_commit": "7396f3e604827d8186c2e16e64b28ee33d3defd0",
+  "sglang_commit": "59a0eb4d843c18b23ecb2c77dc7dfbaea3b0a543",
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "physical_gpu": 7,
+  "hardware_counters_used": false,
+  "policy": "stable-20260929",
+  "gate_m128_min_tokens": 2048,
+  "down_m128_min_tokens": 4096,
+  "small_metadata_max_routes": 512,
+  "fused_activation_quant": false,
+  "experiment": "input-scatter-multigroup",
+  "candidate": {
+    "rows": 1,
+    "groups": 32,
+    "warps": 8
+  },
+  "baseline": "optimized_ops.pack_scatter (frozen policy)",
+  "candidate_is_default": true,
+  "driver": "550.54.15",
+  "sgl-kernel": "0.4.7"
+}

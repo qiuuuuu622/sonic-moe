@@ -10,6 +10,10 @@ Copyright (c) 2025, Wentao Guo, Mayank Mishra, Xinle Cheng, Ion Stoica, Tri Dao
 ![Activation Memory](https://raw.githubusercontent.com/Dao-AILab/sonic-moe/main/assets/mem.png)
 ![Training Throughput](https://raw.githubusercontent.com/Dao-AILab/sonic-moe/main/assets/tput.png)
 
+## Hopper FP8 experiment (this branch)
+
+This branch includes an experimental SGL-compatible Hopper FP8 forward with multi-group input scatter. See [implementation and reproduction](experiments/hopper_fp8/README.md) and [实验记录与优化过程](experiments/hopper_fp8/EXPERIMENTS.md). The regular SonicMoE API remains unchanged.
+
 ## News
 
 - 04/22/2026: We release a [blogpost](./assets/2026-04-22-sonicmoe-blackwell.md) on SonicMoE's activation memory-efficient and IO-aware design, and how we extend it to Blackwell GPUs through [QuACK](https://github.com/Dao-AILab/quack)'s software abstraction.

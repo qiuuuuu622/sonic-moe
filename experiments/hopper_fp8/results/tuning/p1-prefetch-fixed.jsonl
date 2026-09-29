@@ -1,0 +1,20 @@
+{"event": "start", "signature_match": true, "fused_quant": false, "quack_source": "/root/sonic-moe-fp8-next/quack/gemm_sm90.py", "pingpong": true}
+{"event": "case_start", "T": 1024, "routing": "uniform"}
+{"event": "correctness", "T": 1024, "routing": "uniform", "name": "baseline", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "correctness", "T": 1024, "routing": "uniform", "name": "prefetch", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 1024, "routing": "uniform", "stage": "full", "options": [{"name": "baseline"}, {"name": "prefetch", "prefetch": true}], "ms": {"baseline": 0.9142751693725586, "prefetch": 0.9199456214904785}, "samples": {"baseline": [0.9151424407958985, 0.915283203125, 0.9142751693725586, 0.9142016410827637, 0.9155136108398437, 0.9139488220214844, 0.9172896385192871, 0.9142016410827637, 0.9142368316650391], "prefetch": [0.9181471824645996, 0.9199456214904785, 0.9199199676513672, 0.9213567733764648, 0.9203840255737304, 0.9178144454956054, 0.9193568229675293, 0.920137596130371, 0.9229120254516602]}}
+{"event": "graph_mutation", "T": 1024, "routing": "uniform", "name": "baseline", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "graph_mutation", "T": 1024, "routing": "uniform", "name": "prefetch", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 4096, "routing": "uniform"}
+{"event": "correctness", "T": 4096, "routing": "uniform", "name": "baseline", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "correctness", "T": 4096, "routing": "uniform", "name": "prefetch", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 4096, "routing": "uniform", "stage": "full", "options": [{"name": "baseline"}, {"name": "prefetch", "prefetch": true}], "ms": {"baseline": 1.4440192222595214, "prefetch": 1.465059185028076}, "samples": {"baseline": [1.3867263793945312, 1.385814380645752, 1.4069024085998536, 1.4440192222595214, 1.4419360160827637, 1.457526397705078, 1.4716896057128905, 1.4649312019348144, 1.458620834350586], "prefetch": [1.4037055969238281, 1.4010047912597656, 1.464579200744629, 1.463644790649414, 1.465059185028076, 1.5016672134399414, 1.4896736145019531, 1.4881183624267578, 1.4836416244506836]}}
+{"event": "graph_mutation", "T": 4096, "routing": "uniform", "name": "baseline", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "graph_mutation", "T": 4096, "routing": "uniform", "name": "prefetch", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 16384, "routing": "uniform"}
+{"event": "correctness", "T": 16384, "routing": "uniform", "name": "baseline", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "correctness", "T": 16384, "routing": "uniform", "name": "prefetch", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 16384, "routing": "uniform", "stage": "full", "options": [{"name": "baseline"}, {"name": "prefetch", "prefetch": true}], "ms": {"baseline": 4.243283081054687, "prefetch": 4.348825454711914}, "samples": {"baseline": [4.195907211303711, 4.254748916625976, 4.218547058105469, 4.237702560424805, 4.208089447021484, 4.243283081054687, 4.856412887573242, 4.985391998291016, 4.471030426025391], "prefetch": [4.348825454711914, 4.255337524414062, 4.241136169433593, 4.2740222930908205, 4.244172668457031, 4.5921630859375, 4.91467514038086, 4.825420761108399, 4.436860656738281]}}
+{"event": "graph_mutation", "T": 16384, "routing": "uniform", "name": "baseline", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "graph_mutation", "T": 16384, "routing": "uniform", "name": "prefetch", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "completed"}

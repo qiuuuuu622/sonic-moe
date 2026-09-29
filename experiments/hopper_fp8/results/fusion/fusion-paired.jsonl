@@ -1,0 +1,154 @@
+{"event": "start", "signature_match": true, "quack_source": "/root/sonic-moe-fp8-fused/quack/gemm_sm90.py", "pingpong": true}
+{"event": "case_start", "T": 1, "routing": "uniform"}
+{"event": "correctness", "T": 1, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 1, "routing": "uniform", "ms": {"sgl": 0.0426367998123169, "sonic_unfused": 0.04955199956893921, "sonic_fp8": 0.04990079998970032}, "samples": {"sgl": [0.043987199664115906, 0.04266240000724793, 0.0426367998123169, 0.04256640076637268, 0.04254080057144165, 0.04286400079727173, 0.042582398653030394], "sonic_unfused": [0.05006080269813538, 0.049584001302719116, 0.04955199956893921, 0.04963200092315674, 0.04951040148735046, 0.049404799938201904, 0.0494623988866806], "sonic_fp8": [0.04981760084629059, 0.04999040067195892, 0.04990079998970032, 0.049932798743247984, 0.049718400835990904, 0.05, 0.04981119930744171]}}
+{"event": "graph_mutation", "T": 1, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 1, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 1, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 1, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 1, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 2, "routing": "uniform"}
+{"event": "correctness", "T": 2, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 2, "routing": "uniform", "ms": {"sgl": 0.06844800114631652, "sonic_unfused": 0.07462720274925232, "sonic_fp8": 0.07276800274848938}, "samples": {"sgl": [0.06958400011062622, 0.06823040246963501, 0.06826879978179931, 0.06844800114631652, 0.06834239959716797, 0.068476802110672, 0.06868159770965576], "sonic_unfused": [0.07464960217475891, 0.07453439831733703, 0.07472959756851197, 0.07443519830703735, 0.074726402759552, 0.07462720274925232, 0.07425600290298462], "sonic_fp8": [0.07308160066604615, 0.07264959812164307, 0.07276800274848938, 0.07258880138397217, 0.0728767991065979, 0.07284799814224244, 0.072707200050354]}}
+{"event": "graph_mutation", "T": 2, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 2, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 2, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 2, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 2, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 4, "routing": "uniform"}
+{"event": "correctness", "T": 4, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 4, "routing": "uniform", "ms": {"sgl": 0.11513279676437378, "sonic_unfused": 0.11637439727783203, "sonic_fp8": 0.11602879762649536}, "samples": {"sgl": [0.11661440134048462, 0.11555839776992798, 0.11503039598464966, 0.11513279676437378, 0.11543680429458618, 0.11497279405593872, 0.11513279676437378], "sonic_unfused": [0.1167904019355774, 0.11599680185317993, 0.11637439727783203, 0.11684800386428833, 0.11649919748306274, 0.11612800359725953, 0.11635520458221435], "sonic_fp8": [0.1160256028175354, 0.11617599725723267, 0.11622079610824584, 0.11584639549255371, 0.11620160341262817, 0.1159168004989624, 0.11602879762649536]}}
+{"event": "graph_mutation", "T": 4, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 4, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 4, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 4, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 4, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 8, "routing": "uniform"}
+{"event": "correctness", "T": 8, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 8, "routing": "uniform", "ms": {"sgl": 0.20475199222564697, "sonic_unfused": 0.20333759784698485, "sonic_fp8": 0.20277760028839112}, "samples": {"sgl": [0.20602240562438964, 0.20460159778594972, 0.20487680435180664, 0.20457921028137208, 0.20456960201263427, 0.2048703908920288, 0.20475199222564697], "sonic_unfused": [0.20393919944763184, 0.20333759784698485, 0.20268480777740477, 0.2032383918762207, 0.20330240726470947, 0.20343680381774903, 0.2034048080444336], "sonic_fp8": [0.20280640125274657, 0.20277760028839112, 0.20296320915222169, 0.20199999809265137, 0.2028223991394043, 0.2023967981338501, 0.2021791934967041]}}
+{"event": "graph_mutation", "T": 8, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 8, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 8, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 8, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 8, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 16, "routing": "uniform"}
+{"event": "correctness", "T": 16, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 16, "routing": "uniform", "ms": {"sgl": 0.3310271978378296, "sonic_unfused": 0.3250816106796265, "sonic_fp8": 0.32295680046081543}, "samples": {"sgl": [0.33220160007476807, 0.3310271978378296, 0.3307807922363281, 0.331062388420105, 0.33115520477294924, 0.3304640054702759, 0.3301440000534058], "sonic_unfused": [0.3252640008926392, 0.3250816106796265, 0.3262144088745117, 0.32423999309539797, 0.3254751920700073, 0.3247423887252808, 0.3247744083404541], "sonic_fp8": [0.32371199131011963, 0.3236160039901733, 0.3229824066162109, 0.32295680046081543, 0.32244799137115476, 0.3223007917404175, 0.32254719734191895]}}
+{"event": "graph_mutation", "T": 16, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 16, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 16, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 16, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 16, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 32, "routing": "uniform"}
+{"event": "correctness", "T": 32, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 32, "routing": "uniform", "ms": {"sgl": 0.5294432163238525, "sonic_unfused": 0.5255008220672608, "sonic_fp8": 0.5235231876373291}, "samples": {"sgl": [0.5310751914978027, 0.5300159931182862, 0.5294432163238525, 0.5295008182525635, 0.5288864135742187, 0.5292992115020752, 0.5289120197296142], "sonic_unfused": [0.524399995803833, 0.5246111869812011, 0.5249152183532715, 0.5255008220672608, 0.5267295837402344, 0.5263936042785644, 0.5261343955993653], "sonic_fp8": [0.523302412033081, 0.5236127853393555, 0.52292799949646, 0.5235231876373291, 0.5239295959472656, 0.5228608131408692, 0.5235680103302002]}}
+{"event": "graph_mutation", "T": 32, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 32, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 32, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 32, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 32, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 33, "routing": "uniform"}
+{"event": "correctness", "T": 33, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 33, "routing": "uniform", "ms": {"sgl": 0.5593152046203613, "sonic_unfused": 0.5534239768981933, "sonic_fp8": 0.5597280025482178}, "samples": {"sgl": [0.5606080055236816, 0.5600895881652832, 0.559507179260254, 0.5593152046203613, 0.5589824199676514, 0.5592160224914551, 0.558835220336914], "sonic_unfused": [0.55447998046875, 0.5534239768981933, 0.5541056156158447, 0.5519392013549804, 0.5518303871154785, 0.5535903930664062, 0.5531487941741944], "sonic_fp8": [0.5600351810455322, 0.5600704193115235, 0.5587200164794922, 0.5597280025482178, 0.5595136165618897, 0.5598144054412841, 0.5596000194549561]}}
+{"event": "graph_mutation", "T": 33, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 33, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 33, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 33, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 33, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 64, "routing": "uniform"}
+{"event": "correctness", "T": 64, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 64, "routing": "uniform", "ms": {"sgl": 0.7125728130340576, "sonic_unfused": 0.7062975883483886, "sonic_fp8": 0.7113024234771729}, "samples": {"sgl": [0.7146080017089844, 0.7130559921264649, 0.7128032207489013, 0.7125376224517822, 0.7120223999023437, 0.7120960235595704, 0.7125728130340576], "sonic_unfused": [0.7062975883483886, 0.7063776016235351, 0.7060768127441406, 0.7046463966369629, 0.706774377822876, 0.7056416034698486, 0.7065375804901123], "sonic_fp8": [0.7113024234771729, 0.7113855838775635, 0.7118175983428955, 0.7111392021179199, 0.7104864120483398, 0.7100480079650879, 0.7124512195587158]}}
+{"event": "graph_mutation", "T": 64, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 64, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 64, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 64, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 64, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 127, "routing": "uniform"}
+{"event": "correctness", "T": 127, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 127, "routing": "uniform", "ms": {"sgl": 0.8178912162780761, "sonic_unfused": 0.8159616470336915, "sonic_fp8": 0.8181471824645996}, "samples": {"sgl": [0.8189215660095215, 0.8179103851318359, 0.8178912162780761, 0.8176768302917481, 0.8180831909179688, 0.8159616470336915, 0.8162528038024902], "sonic_unfused": [0.8176095962524415, 0.8157407760620117, 0.8174880027770997, 0.8148096084594727, 0.8155232429504394, 0.8160767555236816, 0.8159616470336915], "sonic_fp8": [0.8185919761657715, 0.8174976348876953, 0.8181471824645996, 0.8193344116210938, 0.8175968170166016, 0.8162336349487305, 0.8185152053833008]}}
+{"event": "graph_mutation", "T": 127, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 127, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 127, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 127, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 127, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 128, "routing": "uniform"}
+{"event": "correctness", "T": 128, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 128, "routing": "uniform", "ms": {"sgl": 0.8131168365478516, "sonic_unfused": 0.8128704071044922, "sonic_fp8": 0.8158207893371582}, "samples": {"sgl": [0.8140480041503906, 0.8126463890075684, 0.8141823768615722, 0.8127264022827149, 0.8122847557067872, 0.813161563873291, 0.8131168365478516], "sonic_unfused": [0.8158016204833984, 0.8128704071044922, 0.8131039619445801, 0.8119104385375977, 0.810489559173584, 0.8137248039245606, 0.8125311851501464], "sonic_fp8": [0.8165632247924804, 0.8154080390930176, 0.8152704238891602, 0.8154111862182617, 0.8166399955749511, 0.8158207893371582, 0.8171711921691894]}}
+{"event": "graph_mutation", "T": 128, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 128, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 128, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 128, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 128, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 256, "routing": "uniform"}
+{"event": "correctness", "T": 256, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 256, "routing": "uniform", "ms": {"sgl": 0.8506848335266113, "sonic_unfused": 0.8730560302734375, "sonic_fp8": 0.8679455757141114}, "samples": {"sgl": [0.8537728309631347, 0.8520447731018066, 0.8520671844482421, 0.8504672050476074, 0.8499711990356446, 0.8505951881408691, 0.8506848335266113], "sonic_unfused": [0.8757920265197754, 0.8738335609436035, 0.8721759796142579, 0.8738880157470703, 0.8703840255737305, 0.8730560302734375, 0.8709216117858887], "sonic_fp8": [0.8715423583984375, 0.8716447830200196, 0.8696928024291992, 0.8679455757141114, 0.8676095962524414, 0.8668000221252441, 0.8675295829772949]}}
+{"event": "graph_mutation", "T": 256, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 256, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 256, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 256, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 256, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 512, "routing": "uniform"}
+{"event": "correctness", "T": 512, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 512, "routing": "uniform", "ms": {"sgl": 0.8826751708984375, "sonic_unfused": 0.8685183525085449, "sonic_fp8": 0.8679519653320312}, "samples": {"sgl": [0.884768009185791, 0.8824895858764649, 0.882630443572998, 0.8830880165100098, 0.8826751708984375, 0.8832256317138671, 0.8826751708984375], "sonic_unfused": [0.8676063537597656, 0.8700448036193847, 0.8678432464599609, 0.866431999206543, 0.8691072463989258, 0.8685183525085449, 0.8690976142883301], "sonic_fp8": [0.8675168037414551, 0.8685952186584472, 0.8679519653320312, 0.8679488182067872, 0.8686816215515136, 0.8697440147399902, 0.8663488388061523]}}
+{"event": "graph_mutation", "T": 512, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 512, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 512, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 512, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 512, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 1024, "routing": "uniform"}
+{"event": "correctness", "T": 1024, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 1024, "routing": "uniform", "ms": {"sgl": 0.9309696197509766, "sonic_unfused": 0.9131615638732911, "sonic_fp8": 0.9130784034729004}, "samples": {"sgl": [0.9333824157714844, 0.9314271926879882, 0.9307680130004883, 0.9314975738525391, 0.9309696197509766, 0.9302687644958496, 0.9304800033569336], "sonic_unfused": [0.9131615638732911, 0.9121343612670898, 0.9137791633605957, 0.9125727653503418, 0.9156479835510254, 0.911952018737793, 0.913270378112793], "sonic_fp8": [0.9130784034729004, 0.9130208015441894, 0.9156448364257812, 0.9127936363220215, 0.9133248329162598, 0.9161087989807128, 0.9129376411437988]}}
+{"event": "graph_mutation", "T": 1024, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 1024, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 1024, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 1024, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 1024, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 2048, "routing": "uniform"}
+{"event": "correctness", "T": 2048, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 2048, "routing": "uniform", "ms": {"sgl": 1.1039392471313476, "sonic_unfused": 1.0408160209655761, "sonic_fp8": 1.1095392227172851}, "samples": {"sgl": [1.107699203491211, 1.1039392471313476, 1.1035776138305664, 1.1027935981750487, 1.1037535667419434, 1.1089119911193848, 1.1094816207885743], "sonic_unfused": [1.042899227142334, 1.035961627960205, 1.0342559814453125, 1.036892795562744, 1.0408160209655761, 1.0522591590881347, 1.0440032005310058], "sonic_fp8": [1.107248020172119, 1.1106880187988282, 1.1075008392333985, 1.1058303833007812, 1.1095392227172851, 1.1138079643249512, 1.1125120162963866]}}
+{"event": "graph_mutation", "T": 2048, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 2048, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 2048, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 2048, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 2048, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 4096, "routing": "uniform"}
+{"event": "correctness", "T": 4096, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 4096, "routing": "uniform", "ms": {"sgl": 1.6520704269409179, "sonic_unfused": 1.452019214630127, "sonic_fp8": 1.4614784240722656}, "samples": {"sgl": [1.611414337158203, 1.6361215591430665, 1.6526496887207032, 1.661484718322754, 1.6607295989990234, 1.6520704269409179, 1.6446399688720703], "sonic_unfused": [1.384995174407959, 1.4065471649169923, 1.452019214630127, 1.4790016174316407, 1.4579520225524902, 1.453110408782959, 1.4391263961791991], "sonic_fp8": [1.4017824172973632, 1.4092576026916503, 1.4614784240722656, 1.493769645690918, 1.464451217651367, 1.4622431755065919, 1.4470527648925782]}}
+{"event": "graph_mutation", "T": 4096, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 4096, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 4096, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 4096, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 4096, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 8192, "routing": "uniform"}
+{"event": "correctness", "T": 8192, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 8192, "routing": "uniform", "ms": {"sgl": 2.6929887771606444, "sonic_unfused": 2.3729375839233398, "sonic_fp8": 2.4600223541259765}, "samples": {"sgl": [2.6193920135498048, 2.728512001037598, 2.7064031600952148, 2.6929887771606444, 2.718115234375, 2.6682687759399415, 2.6620960235595703], "sonic_unfused": [2.2259519577026365, 2.3803295135498046, 2.383359909057617, 2.343622398376465, 2.428745651245117, 2.3729375839233398, 2.31429443359375], "sonic_fp8": [2.3706432342529298, 2.4229408264160157, 2.4600223541259765, 2.390598487854004, 2.4861440658569336, 2.4793792724609376, 2.4901599884033203]}}
+{"event": "graph_mutation", "T": 8192, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 8192, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 8192, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 8192, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 8192, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 16384, "routing": "uniform"}
+{"event": "correctness", "T": 16384, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 16384, "routing": "uniform", "ms": {"sgl": 4.789446258544922, "sonic_unfused": 4.246716690063477, "sonic_fp8": 4.544591903686523}, "samples": {"sgl": [4.682774353027344, 4.789446258544922, 4.794281768798828, 4.758310317993164, 4.768191909790039, 5.316255950927735, 5.512345504760742], "sonic_unfused": [4.176777648925781, 4.246716690063477, 4.277833557128906, 4.200227355957031, 4.225759887695313, 4.5857185363769535, 5.080294418334961], "sonic_fp8": [4.609958267211914, 4.540121459960938, 4.544591903686523, 4.494361495971679, 4.505046463012695, 4.545907211303711, 5.1140705108642575]}}
+{"event": "graph_mutation", "T": 16384, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 16384, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 16384, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 16384, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 16384, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 1025, "routing": "hot"}
+{"event": "correctness", "T": 1025, "routing": "hot", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 1025, "routing": "hot", "ms": {"sgl": 0.3008352041244507, "sonic_unfused": 0.345577597618103, "sonic_fp8": 0.31703360080718995}, "samples": {"sgl": [0.3018912076950073, 0.3015455961227417, 0.3006848096847534, 0.3012959957122803, 0.3006752014160156, 0.3008352041244507, 0.30034239292144777], "sonic_unfused": [0.3460256099700928, 0.3455967903137207, 0.3453471899032593, 0.3455744028091431, 0.3458591938018799, 0.34552319049835206, 0.345577597618103], "sonic_fp8": [0.3171295881271362, 0.3172352075576782, 0.31670079231262205, 0.31703360080718995, 0.3165503978729248, 0.3165343999862671, 0.3195584058761597]}}
+{"event": "graph_mutation", "T": 1025, "routing": "hot", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 1025, "routing": "hot", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 1025, "routing": "hot", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 1025, "routing": "hot", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 1025, "routing": "hot", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 4097, "routing": "skew"}
+{"event": "correctness", "T": 4097, "routing": "skew", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 4097, "routing": "skew", "ms": {"sgl": 1.6942655563354492, "sonic_unfused": 1.6401727676391602, "sonic_fp8": 1.6899967193603516}, "samples": {"sgl": [1.680303955078125, 1.6954591751098633, 1.6942655563354492, 1.692838478088379, 1.6929023742675782, 1.6981887817382812, 1.6958688735961913], "sonic_unfused": [1.6156288146972657, 1.6437408447265625, 1.6407583236694336, 1.6401727676391602, 1.6294240951538086, 1.6521312713623046, 1.6401216506958007], "sonic_fp8": [1.6799423217773437, 1.700057601928711, 1.6879295349121093, 1.689593505859375, 1.6899967193603516, 1.7082368850708007, 1.7017215728759765]}}
+{"event": "graph_mutation", "T": 4097, "routing": "skew", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 4097, "routing": "skew", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 4097, "routing": "skew", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 4097, "routing": "skew", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 4097, "routing": "skew", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "completed"}

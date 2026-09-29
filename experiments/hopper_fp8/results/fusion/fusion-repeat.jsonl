@@ -1,0 +1,82 @@
+{"event": "start", "signature_match": true, "quack_source": "/root/sonic-moe-fp8-fused/quack/gemm_sm90.py", "pingpong": true}
+{"event": "case_start", "T": 1, "routing": "uniform"}
+{"event": "correctness", "T": 1, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 1, "routing": "uniform", "ms": {"sgl": 0.04287999868392944, "sonic_unfused": 0.04996480047702789, "sonic_fp8": 0.05006080269813538}, "samples": {"sgl": [0.04425280094146729, 0.04290240108966827, 0.04264000058174133, 0.04287999868392944, 0.042691200971603394, 0.042828801274299624, 0.04287999868392944], "sonic_unfused": [0.04996480047702789, 0.0501151978969574, 0.05020800232887268, 0.049859198927879336, 0.049747198820114136, 0.04972479939460754, 0.04996800124645233], "sonic_fp8": [0.050102400779724124, 0.049955201148986814, 0.05006080269813538, 0.05006080269813538, 0.05021119713783264, 0.049807998538017276, 0.05008000135421753]}}
+{"event": "graph_mutation", "T": 1, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 1, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 1, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 1, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 1, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 32, "routing": "uniform"}
+{"event": "correctness", "T": 32, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 32, "routing": "uniform", "ms": {"sgl": 0.5300191879272461, "sonic_unfused": 0.524835205078125, "sonic_fp8": 0.5232768058776855}, "samples": {"sgl": [0.5311679840087891, 0.5300191879272461, 0.5299200057983399, 0.5290431976318359, 0.5290048122406006, 0.5337632179260254, 0.5314112186431885], "sonic_unfused": [0.5258431911468506, 0.5245024204254151, 0.5241504192352295, 0.5235199928283691, 0.524835205078125, 0.5293568134307861, 0.5264768123626709], "sonic_fp8": [0.5237023830413818, 0.5238687992095947, 0.5240287780761719, 0.5232768058776855, 0.5226719856262207, 0.5229472160339356, 0.5230239868164063]}}
+{"event": "graph_mutation", "T": 32, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 32, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 32, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 32, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 32, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 256, "routing": "uniform"}
+{"event": "correctness", "T": 256, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 256, "routing": "uniform", "ms": {"sgl": 0.8531583786010742, "sonic_unfused": 0.8741727828979492, "sonic_fp8": 0.8700511932373047}, "samples": {"sgl": [0.8548671722412109, 0.8532159805297852, 0.8531200408935546, 0.8528736114501954, 0.8533503532409668, 0.8531583786010742, 0.8531519889831543], "sonic_unfused": [0.8714752197265625, 0.874835205078125, 0.8741727828979492, 0.8729472160339355, 0.8744576454162598, 0.8750080108642578, 0.8737119674682617], "sonic_fp8": [0.8705344200134277, 0.8708800315856934, 0.869865608215332, 0.8698911666870117, 0.8700511932373047, 0.8695455551147461, 0.8716095924377442]}}
+{"event": "graph_mutation", "T": 256, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 256, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 256, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 256, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 256, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 1024, "routing": "uniform"}
+{"event": "correctness", "T": 1024, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 1024, "routing": "uniform", "ms": {"sgl": 0.9318719863891601, "sonic_unfused": 0.9135007858276367, "sonic_fp8": 0.9138463973999024}, "samples": {"sgl": [0.9346207618713379, 0.9327775955200195, 0.9318719863891601, 0.9320896148681641, 0.9317952156066894, 0.9303071975708008, 0.9302720069885254], "sonic_unfused": [0.9129119873046875, 0.9102496147155762, 0.9124095916748047, 0.9136896133422852, 0.9135744094848632, 0.9137120246887207, 0.9135007858276367], "sonic_fp8": [0.9125920295715332, 0.9159359931945801, 0.9141023635864258, 0.9127552032470703, 0.9128640174865723, 0.9138463973999024, 0.9143872261047363]}}
+{"event": "graph_mutation", "T": 1024, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 1024, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 1024, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 1024, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 1024, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 2048, "routing": "uniform"}
+{"event": "correctness", "T": 2048, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 2048, "routing": "uniform", "ms": {"sgl": 1.1087519645690918, "sonic_unfused": 1.0481599807739257, "sonic_fp8": 1.1039263725280761}, "samples": {"sgl": [1.106223964691162, 1.1079903602600099, 1.1079327583312988, 1.1092255592346192, 1.1095487594604492, 1.1087519645690918, 1.1092288017272949], "sonic_unfused": [1.0455103874206544, 1.04618558883667, 1.0447327613830566, 1.0492671966552733, 1.0481599807739257, 1.0486592292785644, 1.0504032135009767], "sonic_fp8": [1.1048383712768555, 1.1032383918762207, 1.1044960021972656, 1.1018303871154784, 1.1023263931274414, 1.1057151794433593, 1.1039263725280761]}}
+{"event": "graph_mutation", "T": 2048, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 2048, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 2048, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 2048, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 2048, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 4096, "routing": "uniform"}
+{"event": "correctness", "T": 4096, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 4096, "routing": "uniform", "ms": {"sgl": 1.6433599472045899, "sonic_unfused": 1.4388352394104005, "sonic_fp8": 1.460860824584961}, "samples": {"sgl": [1.613657569885254, 1.6170047760009765, 1.6224767684936523, 1.6433599472045899, 1.659996795654297, 1.6533472061157226, 1.6536863327026368], "sonic_unfused": [1.3871040344238281, 1.3860575675964355, 1.434272003173828, 1.4388352394104005, 1.4647680282592774, 1.4539039611816407, 1.4565343856811523], "sonic_fp8": [1.4013312339782715, 1.3965920448303222, 1.4567423820495606, 1.4613920211791993, 1.4678239822387695, 1.4688351631164551, 1.460860824584961]}}
+{"event": "graph_mutation", "T": 4096, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 4096, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 4096, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 4096, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 4096, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 8192, "routing": "uniform"}
+{"event": "correctness", "T": 8192, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 8192, "routing": "uniform", "ms": {"sgl": 2.694086456298828, "sonic_unfused": 2.3536800384521483, "sonic_fp8": 2.4719839096069336}, "samples": {"sgl": [2.636841583251953, 2.7005311965942385, 2.694086456298828, 2.6755008697509766, 2.6588640213012695, 2.997238349914551, 3.07061767578125], "sonic_unfused": [2.286956787109375, 2.347011184692383, 2.3536800384521483, 2.4128511428833006, 2.298646354675293, 2.668614387512207, 2.7101343154907225], "sonic_fp8": [2.463420867919922, 2.4719839096069336, 2.452572822570801, 2.500009536743164, 2.4533824920654297, 2.629484748840332, 2.7541248321533205]}}
+{"event": "graph_mutation", "T": 8192, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 8192, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 8192, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 8192, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 8192, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 16384, "routing": "uniform"}
+{"event": "correctness", "T": 16384, "routing": "uniform", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 16384, "routing": "uniform", "ms": {"sgl": 4.827923202514649, "sonic_unfused": 4.380073547363281, "sonic_fp8": 4.633599853515625}, "samples": {"sgl": [4.737804794311524, 4.827923202514649, 4.862041473388672, 4.816672134399414, 4.805327987670898, 5.164579010009765, 5.188524627685547], "sonic_unfused": [4.37597427368164, 4.397375869750976, 4.380073547363281, 4.279942321777344, 4.375785446166992, 4.6129920959472654, 4.661312103271484], "sonic_fp8": [4.561600112915039, 4.633599853515625, 4.619903945922852, 4.545248031616211, 4.6927745819091795, 4.794300842285156, 4.725088119506836]}}
+{"event": "graph_mutation", "T": 16384, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 16384, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 16384, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 16384, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 16384, "routing": "uniform", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 1025, "routing": "hot"}
+{"event": "correctness", "T": 1025, "routing": "hot", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 1025, "routing": "hot", "ms": {"sgl": 0.30040640830993653, "sonic_unfused": 0.34381120204925536, "sonic_fp8": 0.3148960113525391}, "samples": {"sgl": [0.30176639556884766, 0.30048959255218505, 0.30040640830993653, 0.30046720504760743, 0.30021440982818604, 0.29976959228515626, 0.3003551959991455], "sonic_unfused": [0.34431679248809816, 0.3440063953399658, 0.3438688039779663, 0.34381120204925536, 0.3436000108718872, 0.3437376022338867, 0.3437855958938599], "sonic_fp8": [0.31536641120910647, 0.3155231952667236, 0.3148799896240234, 0.3149087905883789, 0.3148960113525391, 0.31462080478668214, 0.31487360000610354]}}
+{"event": "graph_mutation", "T": 1025, "routing": "hot", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 1025, "routing": "hot", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 1025, "routing": "hot", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 1025, "routing": "hot", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 1025, "routing": "hot", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "case_start", "T": 4097, "routing": "skew"}
+{"event": "correctness", "T": 4097, "routing": "skew", "no_sgl_gemm": true, "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "timing", "T": 4097, "routing": "skew", "ms": {"sgl": 1.6948320388793945, "sonic_unfused": 1.6437599182128906, "sonic_fp8": 1.6938432693481444}, "samples": {"sgl": [1.6768575668334962, 1.6948320388793945, 1.6944416046142579, 1.7016799926757813, 1.6945663452148438, 1.6989824295043945, 1.695350456237793], "sonic_unfused": [1.615760040283203, 1.6434911727905273, 1.6466144561767577, 1.6436479568481446, 1.6437599182128906, 1.6494592666625976, 1.6457344055175782], "sonic_fp8": [1.6719423294067384, 1.692086410522461, 1.6938432693481444, 1.6966304779052734, 1.6918079376220703, 1.7115264892578126, 1.698531150817871]}}
+{"event": "graph_mutation", "T": 4097, "routing": "skew", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant", "T": 4097, "routing": "skew", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "prequant_graph_mutation", "T": 4097, "routing": "skew", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "inplace", "T": 4097, "routing": "skew", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "zero_graph", "T": 4097, "routing": "skew", "rel_l2": 0.0, "max_abs": 0.0}
+{"event": "completed"}

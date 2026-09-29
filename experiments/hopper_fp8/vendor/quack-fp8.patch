@@ -1,0 +1,249 @@
+--- a/gemm_sm90.py
++++ b/gemm_sm90.py
+@@ -1,3 +1,5 @@
++# Modified for the experimental Hopper block-FP8 forward, 2026-09-29.
++# See ../README.md (or ../../README.md for epilogue files) for provenance.
+ # Copyright (c) 2025-2026, QuACK team.
+ 
+ # Based on the cute-dsl example:
+@@ -207,6 +209,10 @@
+         # Transforms own their accumulation policy: an 8-bit-MMA transform
+         # (w4a8) does its own scaled per-k-tile promotion (transform.promote),
+         # not the plain fp8 slow-accum path.
++        self.sgl_fp8_scales = False
++        self.sgl_scale_product = False
++        self.sgl_ab_stage_cap = 0
++        self.sgl_gate_layout = False
+         self.fp8_slow_accum = not fp8_fast_accum and a_dtype.width == 8 and transform_a is None
+         # RS mainloop: A comes from registers (canonical ldmatrix s2r load from smem) instead
+         # of the SS descriptor, CUTLASS rs_warpspecialized style — one tile-wide fragment, s2r
+@@ -253,7 +259,11 @@
+                 raise ValueError(f"CTA tile shape N must be divisible by 16 and <= {tile_N_max}")
+ 
+         if not self.pingpong:
+-            if tile_M == 320:  # tile_M / 64 is not even so we have to split along N
++            if tile_M == 64 and tile_N == 256 and self.fp8_slow_accum and getattr(self,"sgl_quant_fused",False):
++                # Two N warp-groups keep partial+scaled FP8 accumulators below
++                # the per-thread register budget; needed by 128-wide gated quant.
++                atom_layout_m, atom_layout_n = 1, 2
++            elif tile_M == 320:  # tile_M / 64 is not even so we have to split along N
+                 atom_layout_m, atom_layout_n = 1, 2
+             elif tile_M == 192:
+                 if tile_N <= 128:
+@@ -477,6 +487,8 @@
+                 + self._sf_smem_bytes_per_stage()
+             ),
+         )
++        if self.sgl_ab_stage_cap:
++            self.ab_stage = min(self.ab_stage, self.sgl_ab_stage_cap)
+         self.sched_stage = 2 if self.pingpong else 1
+ 
+         (
+@@ -561,7 +573,13 @@
+         else:
+             # the slots are part of the unified signature; only blockscaled
+             # (SM120) kernels consume them
+-            assert mSFA is None and mSFB is None, "mSFA/mSFB require a blockscaled GEMM"
++            if const_expr(self.sgl_fp8_scales):
++                assert mSFA is not None and mSFB is not None
++                assert self.fp8_slow_accum and self.cta_tile_shape_mnk[2] == 128
++                assert self.split_k == 1
++                assert not self.concat_layout or self.sgl_gate_layout
++            else:
++                assert mSFA is None and mSFB is None, "mSFA/mSFB require a blockscaled GEMM"
+         mAuxA = None
+         if const_expr(isinstance(mA, TransformAOperand)):
+             assert self.transform_a is not None, "TransformAOperand requires a transform_a"
+@@ -747,6 +765,10 @@
+             self.num_tma_load_bytes += cute.size_in_bytes(self.sf_dtype, sfa_smem_layout)
+             self.num_tma_load_bytes += cute.size_in_bytes(self.sf_dtype, sfb_smem_layout)
+ 
++        if const_expr(self.sgl_fp8_scales):
++            # Ordinary FP32 [token,K/128] / [expert,N/128,K/128] scales.
++            # Raw global tensors, deliberately not Blackwell MXFP TMA scales.
++            tma_tensor_sfa, tma_tensor_sfb = mSFA, mSFB
+         if const_expr(self.split_k > 1):
+             assert mD is not None, "split_k requires an output tensor D"
+         (
+@@ -1301,6 +1323,32 @@
+                 if const_expr(self.pingpong):
+                     self.pingpong_barrier_sync(warp_group_idx, stage="mma")
+                 iket.range_push("mma")
++                scale_fn = None
++                if const_expr(self.sgl_fp8_scales):
++                    tCc = tiled_mma.get_slice(tidx).partition_C(
++                        cute.make_identity_tensor(self.cta_tile_shape_mnk[:2])
++                    )
++                    tCc0 = tiled_mma.get_slice(0).partition_C(
++                        cute.make_identity_tensor(self.cta_tile_shape_mnk[:2])
++                    )
++                    row_values = []
++                    row_first = []
++                    row_map = []
++                    col_values = []
++                    col_map = []
++                    for j in cutlass.range_constexpr(cute.size(tCc0)):
++                        r0, c0 = tCc0[j]
++                        if const_expr(r0 not in row_values):
++                            row_values.append(r0)
++                            row_first.append(j)
++                        row_map.append(row_values.index(r0))
++                        cg = c0 % 2 if const_expr(self.sgl_gate_layout) else c0 // 128
++                        if const_expr(cg not in col_values):
++                            col_values.append(cg)
++                        col_map.append(col_values.index(cg))
++                    scale_fn = partial(self.scale_fp8_partial, acc, acc_slow, tCc,
++                        mSFA_mkl, mSFB_nkl, varlen_params, tile_coord_mnkl,
++                        tuple(row_first), tuple(row_map), tuple(col_values), tuple(col_map))
+                 if const_expr(not self.mma_is_rs):
+                     ab_read_state = self.mma(
+                         ab_pipeline,
+@@ -1310,6 +1358,7 @@
+                         acc_slow,
+                         k_tile_cnt,
+                         warp_group_idx,
++                        scale_fn=scale_fn,
+                     )
+                 else:
+                     ab_read_state = self.mma_rs_interleaved(
+@@ -1608,6 +1657,51 @@
+         return copy_A, prefetch_A
+ 
+     @cute.jit
++    def scale_fp8_partial(self, acc, total, coords, SA, SB, varlen, tile,
++                          row_first: cutlass.Constexpr[tuple],
++                          row_map: cutlass.Constexpr[tuple],
++                          col_values: cutlass.Constexpr[tuple],
++                          col_map: cutlass.Constexpr[tuple], kb: Int32,
++                          first: cutlass.Constexpr[bool]):
++        expert = tile[3]
++        begin = varlen.cu_seqlens_m[expert]
++        end = varlen.cu_seqlens_m[expert + 1]
++        ascale = cute.make_rmem_tensor((len(row_first),), Float32)
++        bscale = cute.make_rmem_tensor((len(col_values),), Float32)
++        for j in cutlass.range_constexpr(len(row_first)):
++            row = begin + tile[0] * self.cta_tile_shape_mnk[0] + coords[row_first[j]][0]
++            sa = Float32(0.0)
++            if row < end:
++                ar = row
++                if const_expr(varlen.mAIdx is not None):
++                    ar = varlen.mAIdx[row]
++                sa = SA[ar, kb]
++            ascale[j] = sa
++        for j in cutlass.range_constexpr(len(col_values)):
++            if const_expr(self.sgl_gate_layout):
++                col = (tile[1] * self.cta_tile_shape_mnk[1] // 256) + col_values[j] * (SB.shape[1] // 2)
++            else:
++                col = (tile[1] * self.cta_tile_shape_mnk[1] // 128) + col_values[j]
++            sb = Float32(0.0)
++            if col < SB.shape[1]:
++                sb = SB[expert, col, kb]
++            bscale[j] = sb
++        combined = cute.make_rmem_tensor((len(row_first), len(col_values)), Float32)
++        if const_expr(self.sgl_scale_product):
++            for r in cutlass.range_constexpr(len(row_first)):
++                for c in cutlass.range_constexpr(len(col_values)):
++                    combined[r,c] = ascale[r] * bscale[c]
++        for i in cutlass.range_constexpr(cute.size(acc)):
++            if const_expr(self.sgl_scale_product):
++                v = acc[i] * combined[row_map[i], col_map[i]]
++            else:
++                v = acc[i] * ascale[row_map[i]] * bscale[col_map[i]]
++            if const_expr(first):
++                total[i] = v
++            else:
++                total[i] = total[i] + v
++
++    @cute.jit
+     def mma(
+         self,
+         ab_pipeline: cutlass.pipeline.PipelineAsync,
+@@ -1617,6 +1711,7 @@
+         acc_slow: Optional[cute.Tensor],
+         k_tile_cnt: Int32,
+         warp_group_idx: Int32,
++        scale_fn: Optional[Callable] = None,
+     ) -> cutlass.pipeline.PipelineState:
+         # Prologue MMAs
+         k_pipe_mmas = 1
+@@ -1639,7 +1734,10 @@
+         # in that case.
+         if const_expr(self.fp8_slow_accum):
+             warpgroup.wait_group(0)
+-            acc_slow.store(acc.load())
++            if const_expr(scale_fn is not None):
++                scale_fn(Int32(0), True)
++            else:
++                acc_slow.store(acc.load())
+ 
+         # MAINLOOP
+         for k_tile in cutlass.range(num_prologue_mma, k_tile_cnt, unroll=1):
+@@ -1654,7 +1752,10 @@
+                 warpgroup.wait_group(k_pipe_mmas)
+             else:
+                 warpgroup.wait_group(0)
+-                acc_slow.store(acc_slow.load() + acc.load())
++                if const_expr(scale_fn is not None):
++                    scale_fn(k_tile, False)
++                else:
++                    acc_slow.store(acc_slow.load() + acc.load())
+             ab_pipeline.consumer_release(ab_release_state)
+             ab_read_state.advance()
+             ab_release_state.advance()
+--- a/epilogue/ops.py
++++ b/epilogue/ops.py
+@@ -1,3 +1,5 @@
++# Modified for the experimental Hopper block-FP8 forward, 2026-09-29.
++# See ../README.md (or ../../README.md for epilogue files) for provenance.
+ # Copyright (c) 2025-2026, Han Guo, Tri Dao.
+ """Composable epilogue operations (EpiOps) for GEMM kernels.
+ 
+@@ -2568,7 +2570,7 @@
+         if const_expr(cute.rank(param) == 3):
+             mOut = param[batch_idx, None, None]
+         elif const_expr(varlen_manager.varlen_m):
+-            mOut = cute.domain_offset((varlen_manager.params.cu_seqlens_m[batch_idx],), param)
++            mOut = cute.domain_offset((varlen_manager.params.cu_seqlens_m[batch_idx], 0), param)
+         else:
+             mOut = param
+         limit_g = mOut.shape[1]
+--- a/epilogue/visit.py
++++ b/epilogue/visit.py
+@@ -1,3 +1,5 @@
++# Modified for the experimental Hopper block-FP8 forward, 2026-09-29.
++# See ../README.md (or ../../README.md for epilogue files) for provenance.
+ # Copyright (c) 2026, Han Guo, Tri Dao.
+ """Device half of the fn epilogue frontend: the traced per-element visit /
+ prepass loops of minted ``@gemm_epilogue`` kernels. The minted class (see
+@@ -100,14 +102,24 @@
+             name: cute.make_rmem_tensor(tRS_rD.layout.shape, self.acc_dtype)
+             for name in self._epi_mod_prepass_outs
+         }
+-        for i in cutlass.range(cute.size(tRS_rD), unroll_full=True):
+-            kw = {
+-                name: (frags[name] if kind == "scalar" else frags[name][i])
+-                for name, kind in self._epi_mod_prepass_operands
+-            }
+-            res = pfn(tRS_rD[i], **kw)
++        if const_expr(self._epi_mod_group_n == 2):
++            assert len(self._epi_mod_prepass_operands) == 0
+             for name in self._epi_mod_prepass_outs:
+-                tmps[name][i] = res[name]
++                assert ops_by_name[name].combine == "max", "Paired prepass duplicates max only"
++            for i in cutlass.range(cute.size(tRS_rD) // 2, unroll_full=True):
++                res = pfn(Pair(tRS_rD[2*i], tRS_rD[2*i+1]))
++                for name in self._epi_mod_prepass_outs:
++                    tmps[name][2*i] = res[name]
++                    tmps[name][2*i+1] = res[name]
++        else:
++            for i in cutlass.range(cute.size(tRS_rD), unroll_full=True):
++                kw = {
++                    name: (frags[name] if kind == "scalar" else frags[name][i])
++                    for name, kind in self._epi_mod_prepass_operands
++                }
++                res = pfn(tRS_rD[i], **kw)
++                for name in self._epi_mod_prepass_outs:
++                    tmps[name][i] = res[name]
+         for name in self._epi_mod_prepass_outs:
+             ops_by_name[name].fn_sink_flush(self, sink_states[name], tmps[name])
+ 

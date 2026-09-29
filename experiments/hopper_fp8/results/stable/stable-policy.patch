@@ -1,0 +1,73 @@
+--- a/sonic_fp8.py
++++ b/sonic_fp8.py
+@@ -26,6 +26,8 @@
+ PINGPONG = True
+ FUSED_GATE = True
+ AUTO_TILE = True
++# Frozen candidate: only Gate threshold and metadata crossover differ from baseline.
++OPT_POLICY = bool(int(os.environ.get("OPT_POLICY", "1")))
+ PACKED = True
+ FAST_METADATA = True
+ from optimized_ops import metadata, pack, combine, pack_scatter
+@@ -67,6 +69,10 @@
+     if AUTO_TILE and T >= 4096:
+         gt = dt = (128, 128)
+         pp = False
++    use_policy = AUTO_TILE and OPT_POLICY and (E, H, I, K) == (256, 3072, 1024, 8)
++    gpp = pp
++    if use_policy and T >= 2048:
++        gt, gpp = (128, 128), False
+     if not (
+         use_fp8_w8a8
+         and block_shape == [128, 128]
+@@ -132,7 +138,7 @@
+             "Fixed-top-k metadata requires power-of-two experts and int32 sort keys."
+         )
+     if FAST_METADATA:
+-        offsets, gather, reverse, sorted_scores = metadata(ids, scores, E)
++        offsets, gather, reverse, sorted_scores = metadata(ids, scores, E, small_limit=512 if use_policy else 2048)
+     else:
+         scatter = torch.empty(TK, dtype=torch.int32, device=device)
+         reverse = torch.empty_like(scatter)
+@@ -187,13 +193,13 @@
+         )
+     elif FUSED_GATE:
+         act = grouped_gate_fp8(
+-            qx, w1, sx, w1_scale, offsets, gate_idx, tile=gt, pingpong=pp
++            qx, w1, sx, w1_scale, offsets, gate_idx, tile=gt, pingpong=gpp
+         )
+         qa, sa = sglang_per_token_group_quant_fp8(act, 128)
+         del act
+     else:
+         gate_up = grouped_fp8(
+-            qx, w1, sx, w1_scale, offsets, gate_idx, tile=gt, pingpong=pp
++            qx, w1, sx, w1_scale, offsets, gate_idx, tile=gt, pingpong=gpp
+         )
+         qa = torch.empty((TK, I), dtype=torch.float8_e4m3fn, device=device)
+         sa = torch.empty((TK, I // 128), dtype=torch.float32, device=device)
+@@ -206,7 +212,7 @@
+     )
+     out = torch.empty_like(x)
+     # Down epilogue already applied route weights before BF16 conversion.
+-    # Reuse SonicMoE's native gather-and-sum with identity weights.
++    # Combine in original top-k slot order using the reverse routing map.
+     if FAST_METADATA:
+         combine(y, reverse, out, K)
+     else:
+--- a/optimized_ops.py
++++ b/optimized_ops.py
+@@ -81,12 +81,12 @@
+     return tl.maximum(a, b)
+ 
+ 
+-def metadata(ids, scores, E):
++def metadata(ids, scores, E, small_limit=2048):
+     T, K = ids.shape
+     R = T * K
+     B = 256
+     C = tr.cdiv(R, B)
+-    if R <= 2048:
++    if R <= small_limit:
+         off = torch.empty(E + 1, device=ids.device, dtype=torch.int32)
+         gather = torch.empty(R, device=ids.device, dtype=torch.int32)
+         rev = torch.empty_like(gather)
